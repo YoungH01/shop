@@ -61,11 +61,11 @@
                                    </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($productByCategory as $index => $item)
+                                    @foreach ($productByCategory as $index => $item)
                                         <tr class="odd text-center">
                                             <td class="sorting_1">{{$index+1}}</td>
-                                            <td>{{$item->name}}</td>
-                                            <td>{{$item->total}}</td>
+                                            <td>{{ $item->name }}</td>
+                                            <td>{{ $item->total }}</td>
                                             <td>
                                                 <a href="{{ route('category.update.view', $item->name) }}" class="btn btn-outline-warning">
                                                     Chỉnh sửa

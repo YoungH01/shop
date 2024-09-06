@@ -40,6 +40,7 @@ Route::prefix('dashboard')->middleware('admin')->group(function(){
         Route::post('/update/{id}',[CustomerController::class,'updateImplement'])->name('customer.update.implement');
         Route::get('/detail/{id}',[CustomerController::class,'detail'])->name('customer.detail');
     });
+
     Route::prefix('product')->group(function(){
         Route::get('/',[ProductController::class,'index'])->name('product.view');
         Route::get('/add',[ProductController::class,'addView'])->name('product.add.view');
@@ -48,6 +49,7 @@ Route::prefix('dashboard')->middleware('admin')->group(function(){
         Route::get('/update/{id}',[ProductController::class,'updateView'])->name('product.update.view');
         Route::post('/update/action/{id}',[ProductController::class,'updateImplement'])->name('product.update.implement');
     });
+
     Route::prefix('category')->group(function(){
          Route::get('/',[CategoryController::class,'index'])->name('category.view');
          Route::get('/add',[CategoryController::class,'addView'])->name('category.add.view');
@@ -56,9 +58,11 @@ Route::prefix('dashboard')->middleware('admin')->group(function(){
          Route::get('/update/{category}',[CategoryController::class,'updateView'])->name('category.update.view');
          Route::post('/update/{category}',[CategoryController::class,'updateImplement'])->name('category.update.implement');
     });
+
     Route::prefix('orders')->group(function(){
         Route::get('/',[OrderController::class,'index'])->name('orders.view');
     });
+    
     Route::prefix('admin')->middleware('isSuperAdmin')->group(function(){
         Route::get('/',[AdminController::class,'index'])->name('admins.view');
         Route::get('/add',[AdminController::class,'addView'])->name('admins.add.view');

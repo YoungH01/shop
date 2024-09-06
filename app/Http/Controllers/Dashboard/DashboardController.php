@@ -8,12 +8,15 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-    //
-
-    public function index(){
+    //index function is render dashboard for admin
+    public function index()
+    {
          return view('dashboard.display');
     }
-    public function logout(Request $request){
+
+    // logout function use for logout for admin
+    public function logout(Request $request)
+    {
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();

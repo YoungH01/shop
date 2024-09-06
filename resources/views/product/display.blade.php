@@ -45,10 +45,17 @@
                             <img src="{{ asset($product->productImage->first()->img) }}" alt="{{ $product->title }}" style="width: 50px">
                         </td>
                         <td>
-                            <a href="{{route('product.update.view',$product->id)}}" class="btn btn-outline-warning" type="submit">Chỉnh sửa</a>
+                            <a href="{{ route('product.update.view', $product->id) }}" class="btn btn-outline-warning" type="submit">Chỉnh sửa</a>
                             <form action="{{ route('product.remove', $product->id) }}" method="POST" style="display:inline;">
                                 @csrf
-                                <button class="btn btn-outline-danger" style="width:100px" type="submit" onclick="return confirm('Are you sure you want to delete this product?')">Xoá</button>
+                                <button 
+                                    class="btn btn-outline-danger" 
+                                    style="width:100px" 
+                                    type="submit" 
+                                    onclick="return confirm('Are you sure you want to delete this product?')"
+                                >
+                                    Xoá
+                                </button>
                             </form>
                         </td>
                     </tr>

@@ -15,9 +15,9 @@ class IsLogin
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next,$guard=null)
+    public function handle(Request $request, Closure $next,$guard = null)
     {
-        if(Auth::guard($guard)->check()){
+        if (Auth::guard($guard)->check()) {
             return redirect()->route('dashboard.layout');
         }
         return $next($request);

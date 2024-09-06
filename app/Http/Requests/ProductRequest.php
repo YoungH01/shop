@@ -24,7 +24,6 @@ class ProductRequest extends FormRequest
     public function rules()
     {
         return [
-            //
             'name_product' => 'required',
             'category' => 'required',
             'new_price' => 'required',
@@ -34,6 +33,7 @@ class ProductRequest extends FormRequest
             'images.*' => 'required|image|mimes:png,jpg,jpeg,webp'
         ];
     }
+
     public function messages()
     {
         return [

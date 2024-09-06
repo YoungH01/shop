@@ -14,9 +14,10 @@ class AdminController extends Controller
     */
     public function index()
     {
-        $admins = User::where('role','admin')->get();
-        return view('admins.display',compact('admins'));
+        $admins = User::where('role', 'admin')->get();
+        return view('admins.display', compact('admins'));
     }
+
     /**
      * addView function render form layout for add admin
     */
@@ -24,6 +25,7 @@ class AdminController extends Controller
     {
         return view('admins.add');
     }
+
     /**
      * addImplement function add admin.
     */
@@ -59,6 +61,7 @@ class AdminController extends Controller
         $admins = User::create($adminData);
         return redirect()->route('admins.view');
     }
+
     /**
      * remove function use for remove admin.
      * @param id is id of admin
@@ -69,6 +72,7 @@ class AdminController extends Controller
         $admin->delete();
         return redirect()->route('admins.view');
     }
+
     /**
      * updateView function update form layout for admin.
      * @param id is id of admin
@@ -76,8 +80,9 @@ class AdminController extends Controller
     public function updateView($id)
     {
         $admin = User::findOrFail($id);
-        return view('admins.update',compact('admin'));
+        return view('admins.update', compact('admin'));
     }
+
     /**
      * updateImplement function use for update admin.
      * @var id is id of admin
@@ -89,26 +94,26 @@ class AdminController extends Controller
             'name' =>'required',
             'password' => 'nullable|string|min:6',
             'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
-            'email' =>'required|email',
-            'address' =>'required',
+            'email' => 'required|email',
+            'address' => 'required',
         ],[
-            'name.required' =>'Vui lòng không bỏ trống', 
-            'password.min' =>'Mật khẩu phải có ít nhất 6 ký tự',           
+            'name.required' => 'Vui lòng không bỏ trống', 
+            'password.min' => 'Mật khẩu phải có ít nhất 6 ký tự',           
             'phone.required' => 'Vui lòng không bỏ trống',
             'phone.regex' => 'Số điện thoại không hợp lệ',
             'phone.min' => 'Số điện thoại phải có ít nhất 10 chữ số',
-            'email.required' =>'Vui lòng không bỏ trống',
-            'email.email' =>'Vui lòng nhập đúng định dạng email',
-            'address.required' =>'Vui lòng không bỏ trống',
+            'email.required' => 'Vui lòng không bỏ trống',
+            'email.email' => 'Vui lòng nhập đúng định dạng email',
+            'address.required' => 'Vui lòng không bỏ trống',
         ]);
-        $adminData=[
+        $adminData = [
             'name' => $request->name,
             'password' => Hash::make($request->password),
             'phone' => $request->phone,
             'email' => $request->email,
             'address' => $request->address,
         ];
-        if($request->filled('password')){
+        if ($request->filled('password')) {
             $adminData['password'] = Hash::make($request->password);
         }
         $admin->update($adminData);

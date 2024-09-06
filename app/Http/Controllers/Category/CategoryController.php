@@ -22,8 +22,9 @@ class CategoryController extends Controller
             ->whereNull('deleted_at')
             ->groupBy('category.name')
             ->get();
-        return view('category.display',compact('productByCategory'));
+        return view('category.display', compact('productByCategory'));
     }
+
     /**
      * Remove function use for remove category.
      * @param category is name of category
@@ -33,6 +34,7 @@ class CategoryController extends Controller
         Category::where('name',$category)->delete();
         return redirect()->route('category.view');
     }
+
     /**
      * addView function use for render  Add category form layout .
      * 
@@ -41,6 +43,7 @@ class CategoryController extends Controller
     {
         return view('category.add');
     }
+
     /**
      * addImplement function use for add category .
      * 
@@ -52,12 +55,13 @@ class CategoryController extends Controller
         ],[
             'name.required' => 'Không được bỏ trống'
         ]);
-        $categoryData =[
+        $categoryData = [
             'name' => $request->name
         ];
         Category::create($categoryData);
         return redirect()->route('category.view');
     }
+
     /**
      * updateView function use for render  Update category form layout .
      * @param category is name of category
@@ -66,6 +70,7 @@ class CategoryController extends Controller
     {
         return view('category.update',['category' => $category]);
     }
+    
     /**
      * updateImplement function use for update name of category .
      * @param category is name of category
@@ -78,8 +83,8 @@ class CategoryController extends Controller
         ],[
             'name.required' => 'Không được bỏ trống'
         ]);
-        Category::where('name',$category)->update(['name' => $request->name]);
-        Product::where('category',$category)->update(['category'=> $request->name]);
+        Category::where('name', $category)->update(['name' => $request->name]);
+        Product::where('category', $category)->update(['category'=> $request->name]);
         return redirect()->route('category.view');
     }
 }

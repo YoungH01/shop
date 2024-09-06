@@ -81,7 +81,8 @@
                                                       class="btn btn-outline-danger" 
                                                       style="width:100px;"
                                                       type="submit" 
-                                                      onclick="return confirm('Are you sure you want to delete this customer?')">
+                                                      onclick="return confirm('Are you sure you want to delete this customer?')"
+                                                   >
                                                       Xoá
                                                    </button>
                                                </form>
@@ -99,9 +100,15 @@
                           <div class="col-sm-12 col-md-7 d-flex justify-content-end">
                              <div class="dataTables_paginate paging_simple_numbers" id="order-listing_paginate">
                                 <ul class="pagination">
-                                   <li class="paginate_button page-item previous disabled" id="order-listing_previous"><a aria-controls="order-listing" aria-disabled="true" role="link" data-dt-idx="previous" tabindex="-1" class="page-link">Previous</a></li>
-                                   <li class="paginate_button page-item active"><a href="#" aria-controls="order-listing" role="link" aria-current="page" data-dt-idx="0" tabindex="0" class="page-link">1</a></li>
-                                   <li class="paginate_button page-item next disabled" id="order-listing_next"><a aria-controls="order-listing" aria-disabled="true" role="link" data-dt-idx="next" tabindex="-1" class="page-link">Next</a></li>
+                                   <li class="paginate_button page-item previous disabled" id="order-listing_previous">
+                                       <a aria-controls="order-listing" aria-disabled="true" role="link" data-dt-idx="previous" tabindex="-1" class="page-link">Previous</a>
+                                    </li>
+                                   <li class="paginate_button page-item active">
+                                       <a href="#" aria-controls="order-listing" role="link" aria-current="page" data-dt-idx="0" tabindex="0" class="page-link">1</a>
+                                    </li>
+                                   <li class="paginate_button page-item next disabled" id="order-listing_next">
+                                       <a aria-controls="order-listing" aria-disabled="true" role="link" data-dt-idx="next" tabindex="-1" class="page-link">Next</a>
+                                    </li>
                                 </ul>
                              </div>
                           </div>

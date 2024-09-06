@@ -7,14 +7,14 @@
          @csrf
           <div class="form-group">
              <label for="exampleInputName1">Tên</label>
-             <input value="{{ old('name',$admin->name) }}" type="text" name="name" class="form-control" id="exampleInputName1" placeholder="Tên">
+             <input value="{{ old('name', $admin->name) }}" type="text" name="name" class="form-control" id="exampleInputName1" placeholder="Tên">
              @if ($errors->has('name'))
                <span class="text-danger">{{ $errors->first('name') }}</span>
              @endif
           </div>
           <div class="form-group">
              <label for="exampleInputEmail3">Email</label>
-             <input value="{{ old('email',$admin->email) }}" type="text" name="email" class="form-control" id="exampleInputEmail3" placeholder="Email">
+             <input value="{{ old('email', $admin->email) }}" type="text" name="email" class="form-control" id="exampleInputEmail3" placeholder="Email">
              @if ($errors->has('email'))
                <span class="text-danger">{{ $errors->first('email') }}</span>
              @endif

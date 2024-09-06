@@ -14,11 +14,10 @@
             </div>
             <div class="form-group col-md-6">
                 <label for="inputCategory">Loại sản phẩm</label>
-                {{-- <input type="text" name="category" value="{{old('category',$product->category)}}" class="form-control" id="inputCategory" placeholder="Loại sản phẩm"> --}}
                 <select class="form-control" name="category" id="inputCategory">
-                    <option value="" disabled  {{old('category',$product->category) ? '':'selected'}}>Chọn loại sản phẩm</option>
+                    <option value="" disabled  {{ old('category', $product->category) ? '' : 'selected' }}>Chọn loại sản phẩm</option>
                     @foreach ($category as $item)
-                        <option value="{{$item->name}}" {{old('category',$product->category) == $item->name ? 'selected' : ''}}>{{$item->name}}</option>
+                        <option value="{{ $item->name }}" {{ old('category', $product->category) == $item->name ? 'selected' : '' }}>{{ $item->name }}</option>
                     @endforeach
                 </select>
                 @if ($errors->has('category'))
@@ -29,14 +28,14 @@
         <div class="form-row">
             <div class="form-group col-md-6">
               <label for="inputNewPrice">Giá mới của sản phẩm</label>
-              <input type="number" name="new_price" value="{{old('new_price',$product->new_price)}}" class="form-control" id="inputNewPrice" placeholder="Loại sản phẩm">
+              <input type="number" name="new_price" value="{{old('new_price', $product->new_price)}}" class="form-control" id="inputNewPrice" placeholder="Loại sản phẩm">
                 @if ($errors->has('new_price'))
                     <span class="text-danger">{{ $errors->first('new_price') }}</span>
                 @endif
             </div>
             <div class="form-group col-md-6">
               <label for="inputOldPrice">Giá cũ của sản phẩm</label>
-              <input type="number" name="old_price" value="{{old('old_price', $product->old_price)}}" class="form-control" id="inputOldPrice" placeholder="Giá sản phẩm">
+              <input type="number" name="old_price" value="{{ old('old_price', $product->old_price) }}" class="form-control" id="inputOldPrice" placeholder="Giá sản phẩm">
               @if ($errors->has('old_price'))
                     <span class="text-danger">{{ $errors->first('old_price') }}</span>
                 @endif
@@ -44,7 +43,7 @@
         </div>
         <div class="form-group">
             <label for="descriptions">Mô tả sản phẩm</label>
-            <textarea class="form-control" name="descriptions" id="descriptions" rows="4">{{old('descriptions', $product->descriptions)}}</textarea>
+            <textarea class="form-control" name="descriptions" id="descriptions" rows="4">{{ old('descriptions', $product->descriptions) }}</textarea>
             @if ($errors->has('descriptions'))
                 <span class="text-danger">{{ $errors->first('descriptions') }}</span>
             @endif
@@ -52,7 +51,7 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputQuantity">Số lượng sản phẩm</label>
-                <input type="number" name="quantity" value="{{old('quantity', $product->quantity)}}" class="form-control" id="inputQuantity" placeholder="Loại sản phẩm">
+                <input type="number" name="quantity" value="{{ old('quantity', $product->quantity) }}" class="form-control" id="inputQuantity" placeholder="Loại sản phẩm">
                   @if ($errors->has('quantity'))
                       <span class="text-danger">{{ $errors->first('quantity') }}</span>
                   @endif
@@ -73,7 +72,7 @@
                 @foreach($product->productImage as $image)
                     <div class="d-flex flex-column align-items-center">
                             <img src="{{ asset($image->img) }}" class="img-thumbnail mb-2" style="height:100px" alt="Product Image">
-                            <input type="checkbox" {{$image->is_main == true ? 'disabled':''}} name="delete_images[]" value="{{ $image->img }}">
+                            <input type="checkbox" {{$image->is_main == true ? 'disabled'  :'' }} name="delete_images[]" value="{{ $image->img }}">
                             <p>Xoá</p>
                     </div>
                 @endforeach

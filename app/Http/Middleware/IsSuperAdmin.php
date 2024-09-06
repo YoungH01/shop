@@ -17,9 +17,11 @@ class IsSuperAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::check() && Auth::user()->id == 1){
+        if (Auth::check() && Auth::user()->id == 1) {
             return $next($request);
         }
-        return redirect()->route('dashboard.layout')->withErrors(['message'=>'Bạn không có quyền truy cập vào trang quan ly admin']);
+        return redirect()
+                ->route('dashboard.layout')
+                ->withErrors(['message' => 'Bạn không có quyền truy cập vào trang quan ly admin']);
     }
 }

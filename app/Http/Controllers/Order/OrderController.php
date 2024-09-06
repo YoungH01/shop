@@ -11,7 +11,8 @@ class OrderController extends Controller
      * index function use for render list order.
      * 
     */
-    public function index(){
+    public function index()
+    {
         return view('order.display');
     }
 }

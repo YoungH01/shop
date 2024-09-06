@@ -8,7 +8,7 @@
         @csrf
         <div class="form-group">
             <label for="cname">Category</label>
-            <input type="text" class="form-control" name="name" minlength="2" value="{{ old('name',$category) }}" placeholder="nhập tên danh mục" />
+            <input type="text" class="form-control" name="name" minlength="2" value="{{ old('name', $category) }}" placeholder="nhập tên danh mục" />
             @if ($errors->has('name'))
                 <span class="text-danger">{{ $errors->first('name') }}</span>
             @endif

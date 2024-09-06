@@ -17,9 +17,11 @@ class CheckAdminRole
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::check() && Auth::user()->role == 'admin'){
+        if (Auth::check() && Auth::user()->role == 'admin') {
             return $next($request);
         }
-        return redirect()->route('login.layout')->withErrors(['message'=>'Bạn không có quyền truy cập vào trang dashboard']);
+        return redirect()
+                ->route('login.layout')
+                ->withErrors(['message' => 'Bạn không có quyền truy cập vào trang dashboard']);
     }
 }

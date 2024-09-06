@@ -19,6 +19,7 @@ class CustomerController extends Controller
 
         return view('customer.display',compact('customers'));
     }
+
     /**
      * addView function use for render Add customer form layout.
     */
@@ -26,6 +27,7 @@ class CustomerController extends Controller
     {
         return view('customer.add');
     }
+
     /**
      * addImplement function use for add customer.
      * 
@@ -47,9 +49,9 @@ class CustomerController extends Controller
             'phone.required' => 'Vui lòng không bỏ trống',
             'phone.regex' => 'Số điện thoại không hợp lệ',
             'phone.min' => 'Số điện thoại phải có ít nhất 10 chữ số',
-            'email.required' =>'Vui lòng không bỏ trống',
-            'email.email' =>'Vui lòng nhập đúng định dạng email',
-            'address.required' =>'Vui lòng không bỏ trống',
+            'email.required' => 'Vui lòng không bỏ trống',
+            'email.email' => 'Vui lòng nhập đúng định dạng email',
+            'address.required' => 'Vui lòng không bỏ trống',
         ]);
         $customerData = [
             'name' => $request->name,
@@ -62,6 +64,7 @@ class CustomerController extends Controller
         User::create($customerData);
         return redirect()->route('customer.view');
     }
+
     /**
      * remove function use for remove customer.
      * @param id is id of customer
@@ -71,7 +74,8 @@ class CustomerController extends Controller
         User::findOrFail($id)->delete();
         return redirect()->route('customer.view');
     }
-     /**
+
+    /**
      * updateView function use for render Update customer form layout.
      * @param id is id of customer
     */
@@ -80,7 +84,8 @@ class CustomerController extends Controller
         $customer = User::findOrFail($id);
         return view('customer.update',compact('customer'));
     }
-     /**
+
+    /**
      * updateImplement function use for update customer.
      * @param id is id of customer
     */
@@ -110,13 +115,14 @@ class CustomerController extends Controller
             'email' => $request->email,
             'address' => $request->address,
         ];
-        if($request->filled('password')){
+        if ($request->filled('password')) {
             $customerData['password'] = Hash::make($request->password);
         }
         $customer->update($customerData);
         return redirect()->route('customer.view');
     }
-     /**
+
+    /**
      * detail function use for render history order of customer.
      * @param id is of customer
     */
