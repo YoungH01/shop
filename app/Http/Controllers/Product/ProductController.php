@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Product;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductRequest;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductImage;
@@ -10,69 +11,65 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    //
-    protected function validateProductData($request){
-        return $request->validate([
-            'name_product' => 'required',
-            'category' => 'required',
-            'new_price' => 'required',
-            'old_price' => 'required',
-            'descriptions' => 'required',
-            'quantity' => 'required',
-            'images.*' => 'required|image|mimes:png,jpg,jpeg,webp'
-        ], [
-            'name_product.required' => 'Không được bỏ trống',
-            'category.required' => 'Không được bỏ trống',
-            'new_price.required' => 'Không được bỏ trống',
-            'old_price.required' => 'Không được bỏ trống',
-            'descriptions.required' => 'Không được bỏ trống',
-            'quantity.required' => 'Không được bỏ trống',
-            'images.*.required' => 'Vui lòng chọn ít nhất một hình ảnh.',
-            'images.*.image' => 'Tất cả các file phải là hình ảnh.',
-            'images.*.mimes' => 'Chỉ chấp nhận các định dạng: png, jpg, jpeg, webp.',
-        ]);
-    }
+    /**
+     * index function use for render list product.
+     * 
+    */
     public function index(){
         $products = Product::with(['productImage' => function($query){
-            $query->where('is_main',true);
+            $query->where('is_main', true);
         }])->get();
-        return view('product.product',compact('products'));
+        return view('product.display', compact('products'));
     }
+     /**
+     * addView function use for render add product form layout .
+     * 
+    */
     public function addView(){
         $category = Category::all();
-        return view('product.product_add',compact('category'));
+        return view('product.add', compact('category'));
     }
-    public function addImplement(Request $request){
-       $this->validateProductData($request);
+    /**
+     * addImplement function use for add product.
+     * 
+    */
+    public function addImplement(ProductRequest $request){
+        $validated = $request->validated(); 
         $productData = [
-            'title' => $request->name_product,
-            'category' => $request->category,
-            'descriptions' => $request->descriptions,
-            'quantity' => $request->quantity,
-            'new_price' => $request->new_price,
-            'old_price' => $request ->old_price
+            'title' => $validated['name_product'],
+            'category' => $validated['category'],
+            'descriptions' => $validated['descriptions'],
+            'quantity' => $validated['quantity'],
+            'new_price' => $validated['new_price'],
+            'old_price' => $validated['old_price']
         ]; 
         $product = Product::create($productData);
         $imageData = [];
-        if($files = $request->file('images')){
-            foreach($files as $index => $file ){
-                $extension= $file->getClientOriginalExtension();
-                $filename= time() . $index . '.' . $extension;
-                $pathImg = "uploads/products/";
-                $file->move($pathImg,$filename);
+        if (isset($validated['images'])) { 
+            foreach ($validated['images'] as $index => $file) {
+                $extension = $file->getClientOriginalExtension();
+                $filename = time() . $index . '.' . $extension;
+                    $pathImg = 'uploads/products/';
+                $fullPath = public_path($pathImg); 
+    
+                $file->move($fullPath, $filename);
+    
                 $imageData[] = [
-                    'product_id'=> $product->id,
-                    'img' => $pathImg .$filename, 
-                    'is_main' => $index == 0 ? true :false,
+                    'product_id' => $product->id, 
+                    'img' => $pathImg . $filename, 
+                    'is_main' => $index == 0 ? true : false, 
                 ];
             }
         }
-
         foreach ($imageData as $data) {
             ProductImage::create($data);
         }
         return redirect()->route('product.view');
     } 
+    /**
+     * removeProduct function use for remove Product .
+     * @param id is id of product
+    */
     public function removeProduct($id){
         $product = Product::findOrFail($id);
         foreach($product->productImage as $image){
@@ -85,21 +82,29 @@ class ProductController extends Controller
         $product->delete();
         return redirect()->route('product.view');
     }
+    /**
+     * updateView function use for render update product form layout .
+     * @param id is id of product
+    */
     public function updateView($id){
         $product = Product::findOrFail($id);
         $category = Category::all();
-        return view('product.product_update',compact('product','category'));
+        return view('product.update',compact('product','category'));
     }
-    public function updateImplement(Request $request,$id){
-        $this->validateProductData($request);
+    /**
+     * updateImplement function use for update product .
+     *  @param id is id of product.
+    */
+    public function updateImplement(ProductRequest $request, $id){
+        $validated = $request->validated(); 
         $product = Product::findOrFail($id);
         $productData = [
-            'title' => $request->name_product,
-            'category' => $request->category,
-            'descriptions' => $request->descriptions,
-            'quantity' => $request->quantity,
-            'new_price' => $request->new_price,
-            'old_price' => $request ->old_price
+            'title' => $validated['name_product'],
+            'category' => $validated['category'],
+            'descriptions' => $validated['descriptions'],
+            'quantity' => $validated['quantity'],
+            'new_price' => $validated['new_price'],
+            'old_price' => $validated['old_price']
         ]; 
         $product->update($productData);
         if ($request->has('delete_images')) {
@@ -113,16 +118,19 @@ class ProductController extends Controller
         }
         if($request->has('images')){
             $imageData = [];
-            if($files = $request->file('images')){
-                foreach($files as $index => $file ){
+            if (isset($validated['images'])) { 
+                foreach ($validated['images'] as $index => $file) {
                     $extension = $file->getClientOriginalExtension();
                     $filename = time() . $index . '.' . $extension;
-                    $pathImg = "uploads/products/";
-                    $file->move($pathImg,$filename);
-                    $imageData[] =[
-                        'product_id'=> $product->id,
-                        'img' => $pathImg .$filename, 
-                        'is_main' => false,
+                        $pathImg = 'uploads/products/';
+                    $fullPath = public_path($pathImg); 
+        
+                    $file->move($fullPath, $filename);
+        
+                    $imageData[] = [
+                        'product_id' => $product->id, 
+                        'img' => $pathImg . $filename, 
+                        'is_main' => $index == 0 ? true : false, 
                     ];
                 }
             }

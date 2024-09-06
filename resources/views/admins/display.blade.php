@@ -10,7 +10,7 @@
                 <p class="m-0">BDHH</p>
                 </a>
             </div>
-            <a href="{{route('admins.add.view')}}">
+            <a href="{{ route('admins.add.view') }}">
                 <button type="button" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text">
                     <i class="mdi mdi-plus-circle"></i>
                     Add Admin
@@ -66,11 +66,11 @@
                                     @foreach($admins as $index => $admin)
                                         <tr class="odd text-center">
                                             <td class="sorting_1">{{$index+1}}</td>
-                                            <td>{{$admin->id}}</td>
-                                            <td>{{$admin->name}}</td>
-                                            <td>{{$admin->email}}</td>
-                                            <td>{{$admin->phone}}</td>
-                                            <td>{{$admin->address}}</td>
+                                            <td>{{ $admin->id }}</td>
+                                            <td>{{ $admin->name }}</td>
+                                            <td>{{ $admin->email }}</td>
+                                            <td>{{ $admin->phone }}</td>
+                                            <td>{{ $admin->address }}</td>
                                             <td>
                                                 <a href="{{ route('admins.update.view', $admin->id) }}" class="btn btn-outline-warning" type="submit">
                                                     Chỉnh sửa

@@ -3,7 +3,7 @@
 <div class="card">
     <div class="card-body">
        <h4 class="card-title">Thêm admin</h4>
-       <form class="forms-sample" method="POST" action="{{route('admins.add.implement')}}">
+       <form class="forms-sample" method="POST" action="{{ route('admins.add.implement') }}">
          @csrf
           <div class="form-group">
              <label for="exampleInputName1">Tên</label>

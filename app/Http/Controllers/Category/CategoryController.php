@@ -10,8 +10,12 @@ use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
-    //
-    public function index(){
+    /**
+     * index function render list category about name category and total product of category.
+     * 
+    */
+    public function index()
+    {
         $productByCategory = DB::table('category')
             ->leftJoin('products', 'category.name', '=', 'products.category')
             ->select('category.name', DB::raw('COUNT(products.category) as total'))
@@ -20,14 +24,29 @@ class CategoryController extends Controller
             ->get();
         return view('category.display',compact('productByCategory'));
     }
-    public function remove($category){
+    /**
+     * Remove function use for remove category.
+     * @param category is name of category
+    */
+    public function remove($category)
+    {
         Category::where('name',$category)->delete();
         return redirect()->route('category.view');
     }
-    public function addView(){
+    /**
+     * addView function use for render  Add category form layout .
+     * 
+    */
+    public function addView()
+    {
         return view('category.add');
     }
-    public function addImplement(Request $request){
+    /**
+     * addImplement function use for add category .
+     * 
+    */
+    public function addImplement(Request $request)
+    {
         $request->validate([
             'name' => 'required',
         ],[
@@ -39,10 +58,21 @@ class CategoryController extends Controller
         Category::create($categoryData);
         return redirect()->route('category.view');
     }
-    public function updateView($category){
+    /**
+     * updateView function use for render  Update category form layout .
+     * @param category is name of category
+    */
+    public function updateView($category)
+    {
         return view('category.update',['category' => $category]);
     }
-    public function updateImplement(Request $request, $category){
+    /**
+     * updateImplement function use for update name of category .
+     * @param category is name of category
+     * 
+    */
+    public function updateImplement(Request $request, $category)
+    {
         $request->validate([
             'name' => 'required',
         ],[

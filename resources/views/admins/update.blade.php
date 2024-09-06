@@ -3,7 +3,7 @@
 <div class="card">
     <div class="card-body">
        <h4 class="card-title">Chỉnh sửa admin</h4>
-       <form class="forms-sample" method="POST" action="{{route('admins.update.implement',$admin->id)}}">
+       <form class="forms-sample" method="POST" action="{{ route('admins.update.implement', $admin->id) }}">
          @csrf
           <div class="form-group">
              <label for="exampleInputName1">Tên</label>

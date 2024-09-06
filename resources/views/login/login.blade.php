@@ -37,7 +37,7 @@
       
               <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
       
-                <form style="width: 23rem;" method="POST" action="{{route('login.implement')}}">
+                <form style="width: 23rem;" method="POST" action="{{ route('login.implement') }}">
                 @csrf
                   <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Log in</h3>
                   @if ($errors->has('message'))
@@ -47,7 +47,7 @@
                   @endif
                   <div data-mdb-input-init class="form-outline mb-4">
                     <label class="form-label" for="form2Example18">Email address</label>
-                    <input type="text" id="form2Example18" name="email" value="{{old('email')}}" class="form-control form-control-lg" />
+                    <input type="text" id="form2Example18" name="email" value="{{ old('email') }}" class="form-control form-control-lg" />
                     @if ($errors->has('email'))
                         <span class="text-danger">{{ $errors->first('email') }}</span>
                     @endif

@@ -4,7 +4,7 @@
 <div class="card">
     <div class="card-body">
        <h4 class="card-title">Cập nhật tên danh mục sản phẩm</h4>
-       <form  method="POST" action="{{ route('category.update.implement',$category) }}" >
+       <form  method="POST" action="{{ route('category.update.implement', $category) }}" >
         @csrf
         <div class="form-group">
             <label for="cname">Category</label>

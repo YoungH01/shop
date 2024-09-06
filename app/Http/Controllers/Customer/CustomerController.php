@@ -9,28 +9,41 @@ use Illuminate\Support\Facades\Hash;
 
 class CustomerController extends Controller
 {
-    //
-    public function index(){
+    /**
+     * index function use for render list customer.
+     * 
+    */
+    public function index()
+    {
         $customers = User::where('role','customer')->get();
 
         return view('customer.display',compact('customers'));
     }
-    public function addView(){
+    /**
+     * addView function use for render Add customer form layout.
+    */
+    public function addView()
+    {
         return view('customer.add');
     }
-    public function addImplement(Request $request){
+    /**
+     * addImplement function use for add customer.
+     * 
+    */
+    public function addImplement(Request $request)
+    {
         $request->validate([
-            'name' =>'required',
+            'name' => 'required',
             'password' => 'required|confirmed',
-            'password_confirmation' =>'required',
+            'password_confirmation' => 'required',
             'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
-            'email' =>'required|email',
+            'email' => 'required|email',
             'address' =>'required',
         ],[
-            'name.required' =>'Vui lòng không bỏ trống',
+            'name.required' => 'Vui lòng không bỏ trống',
             'password.required' => 'Vui lòng không bỏ trống',
-            'password.confirmed' =>'Mật khẩu không khớp nhau',
-            'password_confirmation.required'=>'Vui lòng không bỏ trống',
+            'password.confirmed' => 'Mật khẩu không khớp nhau',
+            'password_confirmation.required' => 'Vui lòng không bỏ trống',
             'phone.required' => 'Vui lòng không bỏ trống',
             'phone.regex' => 'Số điện thoại không hợp lệ',
             'phone.min' => 'Số điện thoại phải có ít nhất 10 chữ số',
@@ -49,15 +62,30 @@ class CustomerController extends Controller
         User::create($customerData);
         return redirect()->route('customer.view');
     }
-    public function remove($id){
+    /**
+     * remove function use for remove customer.
+     * @param id is id of customer
+    */
+    public function remove($id)
+    {
         User::findOrFail($id)->delete();
         return redirect()->route('customer.view');
     }
-    public function updateView($id){
+     /**
+     * updateView function use for render Update customer form layout.
+     * @param id is id of customer
+    */
+    public function updateView($id)
+    {
         $customer = User::findOrFail($id);
         return view('customer.update',compact('customer'));
     }
-    public function updateImplement(Request $request,$id){
+     /**
+     * updateImplement function use for update customer.
+     * @param id is id of customer
+    */
+    public function updateImplement(Request $request, $id)
+    {
         $customer = User::findOrFail($id);
         $request->validate([
             'name' =>'required',
@@ -75,7 +103,7 @@ class CustomerController extends Controller
             'email.email' =>'Vui lòng nhập đúng định dạng email',
             'address.required' =>'Vui lòng không bỏ trống',
         ]);
-        $customerData=[
+        $customerData = [
             'name' => $request->name,
             'password' => Hash::make($request->password),
             'phone' => $request->phone,
@@ -88,6 +116,10 @@ class CustomerController extends Controller
         $customer->update($customerData);
         return redirect()->route('customer.view');
     }
+     /**
+     * detail function use for render history order of customer.
+     * @param id is of customer
+    */
     public function detail($id){
         return view('customer.detail');
     }

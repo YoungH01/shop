@@ -65,14 +65,14 @@
                                 <tbody>
                                     @foreach($customers as $index => $customer)
                                         <tr class="odd text-center">
-                                            <td class="sorting_1">{{$index+1}}</td>
-                                            <td>{{$customer->id}}</td>
+                                            <td class="sorting_1">{{ $index+1 }}</td>
+                                            <td>{{ $customer->id }}</td>
                                             <td><a href="{{ route('customer.detail',$customer->id) }}">{{$customer->name}}</a></td>
-                                            <td>{{$customer->email}}</td>
-                                            <td>{{$customer->phone}}</td>
-                                            <td>{{$customer->address}}</td>
+                                            <td>{{ $customer->email }}</td>
+                                            <td>{{ $customer->phone }}</td>
+                                            <td>{{ $customer->address }}</td>
                                             <td>
-                                                <a href="{{ route('customer.update.view',$customer->id) }}" class="btn btn-outline-warning" type="submit">
+                                                <a href="{{ route('customer.update.view', $customer->id) }}" class="btn btn-outline-warning" type="submit">
                                                     Chỉnh sửa
                                                 </a>
                                                 <form action="{{ route('customer.remove', $customer->id) }}" method="POST" style="display:inline;">
