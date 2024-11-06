@@ -26,7 +26,8 @@
                     <th>Tên sản phẩm</th>
                     <th>Danh mục</th>
                     <th>Mô tả</th>
-                    <th>Số lượng</th>
+                    <th>Tồn Kho</th>
+                    <th>Đã bán</th>
                     <th>Giá mới</th>
                     <th>Hình ảnh chính</th>
                     <th>Tuỳ chỉnh</th>
@@ -40,6 +41,7 @@
                         <td>{{ $product->category }}</td>
                         <td style="max-width: 100px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ $product->descriptions }}</td>
                         <td>{{ $product->quantity }}</td>
+                        <td>{{ $product->sold }}</td>
                         <td>{{ $product->new_price }}</td>
                         <td>
                             <img src="{{ asset($product->productImage->first()->img) }}" alt="{{ $product->title }}" style="width: 50px">

@@ -7,7 +7,7 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="name">Tên sản phẩm:</label>
-                <input type="text" class="form-control" value="{{ old('name_product') }}" id="name" name="name_product">
+                <input type="text" class="form-control" value="{{ old('name_product') }}" id="name" name="name_product" placeholder="tên của sản phẩm">
                 @if ($errors->has('name_product'))
                     <span class="text-danger">{{ $errors->first('name_product') }}</span>
                 @endif
@@ -28,7 +28,7 @@
         <div class="form-row">
             <div class="form-group col-md-6">
               <label for="inputNewPrice">Giá mới của sản phẩm</label>
-              <input type="number" name="new_price" value="{{ old('new_price') }}" class="form-control" id="inputNewPrice" placeholder="Loại sản phẩm">
+              <input type="number" name="new_price" value="{{ old('new_price') }}" class="form-control" id="inputNewPrice" placeholder="Giá sản phẩm">
                 @if ($errors->has('new_price'))
                     <span class="text-danger">{{ $errors->first('new_price') }}</span>
                 @endif
@@ -50,8 +50,8 @@
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="inputQuantity">Số lượng sản phẩm</label>
-                <input type="number" name="quantity" value="{{ old('quantity') }}" class="form-control" id="inputQuantity" placeholder="Loại sản phẩm">
+                <label for="inputQuantity">Size, màu và Số lượng sản phẩm</label>
+                <input type="string" name="quantity" value="{{ old('quantity') }}" class="form-control" id="inputQuantity" placeholder="theo format (color,size,quantity)">
                   @if ($errors->has('quantity'))
                       <span class="text-danger">{{ $errors->first('quantity') }}</span>
                   @endif

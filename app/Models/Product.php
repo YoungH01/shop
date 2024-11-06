@@ -10,7 +10,7 @@ class Product extends Model
 {
     use HasFactory,SoftDeletes;
     protected $fillable = [
-        'title', 'category', 'descriptions', 'quantity','new_price', 'old_price'
+        'title', 'category', 'descriptions', 'quantity','new_price', 'old_price' , 'sold'
     ];
 
     public function cartItems()
@@ -26,5 +26,9 @@ class Product extends Model
     public function productImage()
     {
         return $this->hasMany(ProductImage::class);
+    }
+    public function productAttribute()
+    {
+        return $this->hasMany(AttributeProduct::class);
     }
 }

@@ -14,8 +14,8 @@
       </li>
       <li class="nav-item pt-3">
         <a class="nav-link d-block" href="index.html">
-          <img class="sidebar-brand-logo" src="{{asset('assets_pluginAdmin/images/logo.svg')}}" alt="" />
-          <img class="sidebar-brand-logomini" src="{{asset('assets_pluginAdmin/images/logo-mini.svg')}}" alt="" />
+          <img class="sidebar-brand-logo" src="{{ asset('assets_pluginAdmin/images/logo.svg') }}" alt="" />
+          <img class="sidebar-brand-logomini" src="{{ asset('assets_pluginAdmin/images/logo-mini.svg')}}" alt="" />
           <div class="small font-weight-light pt-1">Responsive Dashboard</div>
         </a>
         <form class="d-flex align-items-center" action="#">
@@ -31,31 +31,31 @@
         <span class="nav-item-head">Template Pages</span>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{route('dashboard.layout')}}">
+        <a class="nav-link" href="{{ route('dashboard.layout') }}">
           <i class="mdi mdi-compass-outline menu-icon"></i>
           <span class="menu-title">Dashboard</span>
         </a>
       </li>
       <li class="nav-item {{Request::is('dashboard/customer*') ? 'active' : '' }}">
-        <a class="nav-link" href="{{route('customer.view')}}">
+        <a class="nav-link" href="{{ route('customer.view') }}">
           <i class="mdi mdi-contacts menu-icon"></i>
           <span class="menu-title">Customer</span>
         </a>
       </li>
       <li class="nav-item {{Request::is('dashboard/admin*') ? 'active' : '' }}">
-        <a class="nav-link" href="{{route('admins.view')}}">
+        <a class="nav-link" href="{{ route('admins.view') }}">
           <i class="mdi mdi-account-key menu-icon"></i>
           <span class="menu-title">Admin</span>
         </a>
       </li>
       <li class="nav-item {{Request::is('dashboard/product*') ? 'active' : '' }}">
-        <a class="nav-link " href="{{route('product.view')}}">
+        <a class="nav-link " href="{{ route('product.view') }}">
           <i class="mdi mdi-cube menu-icon"></i>
           <span class="menu-title">Products</span>
         </a>
       </li>
       <li class="nav-item {{Request::is('dashboard/category*') ? 'active' : '' }}">
-        <a class="nav-link" href="{{route('category.view')}}">
+        <a class="nav-link" href="{{ route('category.view') }}">
           <i class="mdi mdi-database-minus menu-icon"></i>
           <span class="menu-title">Category</span>
         </a>

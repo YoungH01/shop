@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Product;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
+use App\Models\AttributeProduct;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductImage;
@@ -22,6 +23,30 @@ class ProductController extends Controller
         }])->get();
         return view('product.display', compact('products'));
     }
+    /**
+     * addView function use for render add product form layout .
+     * 
+    */
+    public function attributeSplit($input)
+    {
+        $groups = explode(';', rtrim($input, ';'));
+
+        $result = [];
+
+        foreach ($groups as $group) {
+
+            $group = trim($group, '()');
+            
+            $values = explode(',', $group);
+            
+            $result[] = [
+                'color' => $values[0] ?? null,
+                'size'  => $values[1] ?? null,
+                'quantity' => (int)($values[2]) ?? null
+            ];
+        }
+        return $result;
+    }
 
      /**
      * addView function use for render add product form layout .
@@ -39,15 +64,20 @@ class ProductController extends Controller
     */
     public function addImplement(ProductRequest $request)
     {
-        $validated = $request->validated(); 
+
+        $validated = $request->validated();
+        $attributes = $this->attributeSplit($validated['quantity']);
+        $total = array_sum(array_column($attributes, 'quantity'));
         $productData = [
             'title' => $validated['name_product'],
             'category' => $validated['category'],
             'descriptions' => $validated['descriptions'],
-            'quantity' => $validated['quantity'],
+            'quantity' => $total,
             'new_price' => $validated['new_price'],
-            'old_price' => $validated['old_price']
-        ]; 
+            'old_price' => $validated['old_price'],
+            'sold' => 0
+        ];
+        // dd($productData);
         $product = Product::create($productData);
         $imageData = [];
         if (isset($validated['images'])) { 
@@ -69,6 +99,11 @@ class ProductController extends Controller
         foreach ($imageData as $data) {
             ProductImage::create($data);
         }
+        foreach ($attributes as &$item) {
+            $item['product_id'] = $product->id;
+            $item['quantity'] = (string)$item['quantity'];
+            AttributeProduct::create($item);
+        }
         return redirect()->route('product.view');
     } 
 
@@ -85,6 +120,7 @@ class ProductController extends Controller
                 unlink($imagePath);
             }
         }
+        $product->productAttribute()->delete();
         $product->productImage()->delete();
         $product->delete();
         return redirect()->route('product.view');
@@ -97,8 +133,26 @@ class ProductController extends Controller
     public function updateView($id)
     {
         $product = Product::findOrFail($id);
+        $attributes = Product::with('productAttribute')->where('id',$id)->first();
+        $arr=[];
+        foreach($attributes->productAttribute as $item){
+            $arr[]=[
+                'color' => $item->color,
+                'size' => $item->size,
+                'quantity' => $item->quantity
+            ];
+        }
+        // dd($arr);
+        $formattedAttribute = implode(');(', array_map(function($item) {
+            return implode(',', [
+                $item['color'],
+                $item['size'],
+                $item['quantity']
+            ]);
+        }, $arr));
+        $formattedAttribute = "($formattedAttribute)";
         $category = Category::all();
-        return view('product.update', compact('product','category'));
+        return view('product.update', compact('product','category','formattedAttribute'));
     }
 
     /**
@@ -107,13 +161,15 @@ class ProductController extends Controller
     */
     public function updateImplement(ProductRequest $request, $id)
     {
-        $validated = $request->validated(); 
+        $validated = $request->validated();
+        $attributes = $this->attributeSplit($validated['quantity']);
+        $total = array_sum(array_column($attributes, 'quantity'));
         $product = Product::findOrFail($id);
         $productData = [
             'title' => $validated['name_product'],
             'category' => $validated['category'],
             'descriptions' => $validated['descriptions'],
-            'quantity' => $validated['quantity'],
+            'quantity' => $total,
             'new_price' => $validated['new_price'],
             'old_price' => $validated['old_price']
         ]; 
@@ -147,6 +203,24 @@ class ProductController extends Controller
                 ProductImage::create($data);
             }
         }
+
+        foreach ($attributes as &$attribute) {
+            $existingAttribute = AttributeProduct::where('color', $attribute['color'])
+                ->where('size', $attribute['size'])
+                ->where('product_id', $id)
+                ->first();
+        
+            if ($existingAttribute) {
+                $existingAttribute->update([
+                    'quantity' => (string)$attribute['quantity'],
+                ]);
+            } else {
+                $attribute['product_id'] = $id;
+                $attribute['quantity'] = (string)$attribute['quantity'];
+                AttributeProduct::create($attribute);
+            }
+        }
+
         return redirect()->route('product.view');
     }
 }   

@@ -29,7 +29,7 @@ class ProductRequest extends FormRequest
             'new_price' => 'required',
             'old_price' => 'required',
             'descriptions' => 'required',
-            'quantity' => 'required',
+            'quantity' => 'required|regex: /^\(\w+,\w+,\w+\)(;\(\w+,\w+,\w+\))*$/',
             'images.*' => 'required|image|mimes:png,jpg,jpeg,webp'
         ];
     }
@@ -43,6 +43,7 @@ class ProductRequest extends FormRequest
             'old_price.required' => 'Không được bỏ trống',
             'descriptions.required' => 'Không được bỏ trống',
             'quantity.required' => 'Không được bỏ trống',
+            'quantity.regex' => 'sai cấu trúc  (color,size,quantity)',
             'images.*.required' => 'Vui lòng chọn ít nhất một hình ảnh.',
             'images.*.image' => 'Tất cả các file phải là hình ảnh.',
             'images.*.mimes' => 'Chỉ chấp nhận các định dạng: png, jpg, jpeg, webp.',

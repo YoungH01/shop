@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -127,6 +128,7 @@ class CustomerController extends Controller
      * @param id is of customer
     */
     public function detail($id){
-        return view('customer.detail');
+        $orders = Order::where('user_id',$id)->get();
+        return view('customer.detail',compact('orders'));
     }
 }

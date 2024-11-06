@@ -26,7 +26,7 @@
           <div class="d-flex justify-content-between flex-wrap">
             <div>
               <div class="card-title mb-0">Sales Revenue</div>
-              <h3 class="font-weight-bold mb-0">$32,409</h3>
+              <h3 class="font-weight-bold mb-0">{{$totalPrice}} $</h3>
             </div>
             <div>
               <div class="d-flex flex-wrap pt-2 justify-content-between sales-header-right">
@@ -88,7 +88,7 @@
               <i class="mdi mdi-help-circle-outline ml-2 mouse-pointer"></i>
             </div>
           </div>
-          <h3 class="font-weight-bold mb-0"> 2,409 <span class="text-success h5">4,5%<i class="mdi mdi-arrow-up"></i></span>
+          <h3 class="font-weight-bold mb-0"> {{$totalCustomer}} <span class="text-success h5">4,5%<i class="mdi mdi-arrow-up"></i></span>
           </h3>
           <span class="text-muted font-13">Avg customers/Day</span>
           <div class="line-chart-wrapper">

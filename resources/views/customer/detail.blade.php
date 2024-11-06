@@ -34,147 +34,32 @@
                       <div class="col-sm-12">
                          <table id="order-listing" class="table dataTable no-footer" aria-describedby="order-listing_info">
                             <thead>
-                               <tr>
+                               <tr class="text-center">
                                   <th class="sorting sorting_asc" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Order #: activate to sort column descending" style="width: 72.5781px;">Order #</th>
                                   <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" aria-label="Purchased On: activate to sort column ascending" style="width: 122.422px;">Purchased On</th>
-                                  <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" aria-label="Ship to: activate to sort column ascending" style="width: 72.375px;">Ship to</th>
-                                  <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" aria-label="Base Price: activate to sort column ascending" style="width: 91.9688px;">Base Price</th>
+                                  <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" aria-label="Ship to: activate to sort column ascending" style="width: 72.375px;">name</th>
+                                  <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" aria-label="Base Price: activate to sort column ascending" style="width: 91.9688px;">shiped to</th>
                                   <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" aria-label="Purchased Price: activate to sort column ascending" style="width: 138.031px;">Purchased Price</th>
                                   <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending" style="width: 83.0156px;">Status</th>
                                   <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" aria-label="Actions: activate to sort column ascending" style="width: 71.5px;">Actions</th>
                                </tr>
                             </thead>
                             <tbody>
-                               <tr class="odd">
-                                  <td class="sorting_1">1</td>
-                                  <td>2012/08/03</td>
-                                  <td>New York</td>
-                                  <td>$1500</td>
-                                  <td>$3200</td>
-                                  <td>
-                                     <label class="badge badge-info">On hold</label>
-                                  </td>
-                                  <td>
-                                     <button class="btn btn-outline-primary">View</button>
-                                  </td>
-                               </tr>
-                               <tr class="even">
-                                  <td class="sorting_1">2</td>
-                                  <td>2015/04/01</td>
-                                  <td>Brazil</td>
-                                  <td>$4500</td>
-                                  <td>$7500</td>
-                                  <td>
-                                     <label class="badge badge-danger">Pending</label>
-                                  </td>
-                                  <td>
-                                     <button class="btn btn-outline-primary">View</button>
-                                  </td>
-                               </tr>
-                               <tr class="odd">
-                                  <td class="sorting_1">3</td>
-                                  <td>2010/11/21</td>
-                                  <td>Tokyo</td>
-                                  <td>$2100</td>
-                                  <td>$6300</td>
-                                  <td>
-                                     <label class="badge badge-success">Closed</label>
-                                  </td>
-                                  <td>
-                                     <button class="btn btn-outline-primary">View</button>
-                                  </td>
-                               </tr>
-                               <tr class="even">
-                                  <td class="sorting_1">4</td>
-                                  <td>2016/01/12</td>
-                                  <td>Tokyo</td>
-                                  <td>$2100</td>
-                                  <td>$6300</td>
-                                  <td>
-                                     <label class="badge badge-success">Closed</label>
-                                  </td>
-                                  <td>
-                                     <button class="btn btn-outline-primary">View</button>
-                                  </td>
-                               </tr>
-                               <tr class="odd">
-                                  <td class="sorting_1">5</td>
-                                  <td>2017/12/28</td>
-                                  <td>Tokyo</td>
-                                  <td>$2100</td>
-                                  <td>$6300</td>
-                                  <td>
-                                     <label class="badge badge-success">Closed</label>
-                                  </td>
-                                  <td>
-                                     <button class="btn btn-outline-primary">View</button>
-                                  </td>
-                               </tr>
-                               <tr class="even">
-                                  <td class="sorting_1">6</td>
-                                  <td>2000/10/30</td>
-                                  <td>Tokyo</td>
-                                  <td>$2100</td>
-                                  <td>$6300</td>
-                                  <td>
-                                     <label class="badge badge-info">On-hold</label>
-                                  </td>
-                                  <td>
-                                     <button class="btn btn-outline-primary">View</button>
-                                  </td>
-                               </tr>
-                               <tr class="odd">
-                                  <td class="sorting_1">7</td>
-                                  <td>2011/03/11</td>
-                                  <td>Tokyo</td>
-                                  <td>$2100</td>
-                                  <td>$6300</td>
-                                  <td>
-                                     <label class="badge badge-success">Closed</label>
-                                  </td>
-                                  <td>
-                                     <button class="btn btn-outline-primary">View</button>
-                                  </td>
-                               </tr>
-                               <tr class="even">
-                                  <td class="sorting_1">8</td>
-                                  <td>2015/06/25</td>
-                                  <td>Italy</td>
-                                  <td>$6300</td>
-                                  <td>$2100</td>
-                                  <td>
-                                     <label class="badge badge-info">On-hold</label>
-                                  </td>
-                                  <td>
-                                     <button class="btn btn-outline-primary">View</button>
-                                  </td>
-                               </tr>
-                               <tr class="odd">
-                                  <td class="sorting_1">9</td>
-                                  <td>2016/11/12</td>
-                                  <td>Tokyo</td>
-                                  <td>$2100</td>
-                                  <td>$6300</td>
-                                  <td>
-                                     <label class="badge badge-success">Closed</label>
-                                  </td>
-                                  <td>
-                                     <button class="btn btn-outline-primary">View</button>
-                                  </td>
-                               </tr>
-                               <tr class="even">
-                                  <td class="sorting_1">10</td>
-                                  <td>2003/12/26</td>
-                                  <td>Germany</td>
-                                  <td>$1100</td>
-                                  <td>$2300</td>
-                                  <td>
-                                     <label class="badge badge-danger">Pending</label>
-                                  </td>
-                                  <td>
-                                     <button class="btn btn-outline-primary">View</button>
-                                  </td>
-                               </tr>
+                              @foreach($orders as $index => $order)
+                                 <tr class="odd text-center">
+                                    <td class="sorting_1">{{ $index + 1 }}</td>
+                                    <td>{{ $order->created_at }}</td>
+                                    <td>{{ $order->name }}</td>
+                                    <td>{{ $order->address }}</td>
+                                    <td class="text-center">${{ $order->total_price }}</td>
+                                    <td>
+                                       <label class="badge badge-success">Done</label>
+                                    </td>
+                                    <td>
+                                       <button class="btn btn-outline-primary">View</button>
+                                    </td>
+                                 </tr>
+                            @endforeach
                             </tbody>
                          </table>
                       </div>

@@ -51,7 +51,7 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputQuantity">Số lượng sản phẩm</label>
-                <input type="number" name="quantity" value="{{ old('quantity', $product->quantity) }}" class="form-control" id="inputQuantity" placeholder="Loại sản phẩm">
+                <input type="string" name="quantity" value="{{ old('quantity', $formattedAttribute) }}" class="form-control" id="inputQuantity" placeholder="theo format (color,size,quantity)">
                   @if ($errors->has('quantity'))
                       <span class="text-danger">{{ $errors->first('quantity') }}</span>
                   @endif

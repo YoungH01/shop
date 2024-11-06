@@ -33,10 +33,13 @@ class LoginController extends Controller
             'password.min' => 'mật khẩu phải có ít nhất 6 ký tự'
         ]);
         $credentials = $request->only('email', 'password');
-        if ( Auth::attempt($credentials) ) {
+        if (Auth::attempt($credentials)) {
             if (Auth::user()->role == 'admin') {
                 return redirect()->route('dashboard.layout');
             }else {
+                Auth::logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
                 return redirect()
                         ->route('login.layout')
                         ->withErrors(['message' => 'Bạn không có quyền truy cập vào trang này']);
